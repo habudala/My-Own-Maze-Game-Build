@@ -28,7 +28,7 @@ function initCanvas () {
 		this.y = 0;
 		this.w = 40;
 		this.h = 40;
-		this.clipX = 32;
+		this.clipX = 0;
 		this.clipY = 64;
 		this.clipW = 32;
 		this.clipH = 32;
@@ -39,8 +39,8 @@ function initCanvas () {
 			ctx.drawImage(heroBackground,this.clipX+=32, this.clipY, this.clipW, this.clipH, this.x, this.y, this.w, this.h);
 
 			
-			if (this.clipX >= 60) {
-				this.clipX = 0;
+			if (this.clipX >= 64) {
+				this.clipX = -32;
 			}
 			
 		}
@@ -54,11 +54,11 @@ function initCanvas () {
 	var backGround = new PlayerBackground();
 	backGround.x = 10;
 	backGround.y = 310;
-	backGround.w = 40;
-	backGround.h = 40;
-	backGround.clipX = 32;
+	backGround.w = 50;
+	backGround.h = 50;
+	backGround.clipX = -32;
 	backGround.clipY = 64;
-	backGround.clipW = 31;
+	backGround.clipW = 32;
 	backGround.clipH = 32;
 
 
@@ -78,7 +78,7 @@ function initCanvas () {
 
 
 	///// setting animation timer
-	var animateInterval = setInterval( animate,200);
+	var animateInterval = setInterval( animate,100);
 
 
 
@@ -107,25 +107,25 @@ function initCanvas () {
 		switch (target) {
 			//upward movement
 			case 38:
-					 backGround.y -= 13 ;
-					 backGround.clipY = 96;
+					 backGround.y -= 12 ;
+					 backGround.clipY = 96; console.log();
 
 			break;
 			//downward movement
 			case 40: 
-					 backGround.y += 13;
+					 backGround.y += 12; 
 					 backGround.clipY = 0;
 
 			break;
 			//left movement
 			case 37:
-					 backGround.x -= 13; 
+					 backGround.x -= 12; 
 					 backGround.clipY = 32;
 
 			break;
 			//right movement
 			case 39:
-			 		backGround.x += 13;
+			 		backGround.x += 12; 
 			 		backGround.clipY = 64;
 
 
