@@ -1,10 +1,14 @@
 
 // new images are made here for the Image Constructor
+
 // new hero image instance
+
 var heroBackground = new Image();
 heroBackground.src = "Images/sprite image.png";
 
+////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////INITIALIZING GAME ANIMATION/////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////
 function initCanvas () {
 
 	var ctx = document.getElementById("game").getContext("2d");
@@ -14,7 +18,7 @@ function initCanvas () {
 	
 	
 
-
+///////////////////////////////////////////////////////////
 //////CHARACTER BACKGROUNDS CONSTRUCTOR FUNCTION//////////
 
 	 function PlayerBackground () {
@@ -32,7 +36,7 @@ function initCanvas () {
 
 	};
 
-
+///////////////////////////////////////////////////
 ///////INSTANCES OF BACKGROUNDS(PLAYERS)//////////
 
 	////// player////////
@@ -47,20 +51,12 @@ function initCanvas () {
 	backGround.clipH = 32;
 
 
-
+///////////////////////////////////////////
 //////WALLS CONSTRUCTOR FUNCTION//////////
 
 	 function CreateRestr () {
 
-		//properties
-		// this.x = 0;
-		// this.y = 0;
-		// this.w = 40;
-		// this.h = 40;
-		// this.clipX = 0;
-		// this.clipY = 64;
-		// this.clipW = 32;
-		// this.clipH = 32;
+	 	//properties
 
 		// methods 
 		this.render = function(){
@@ -77,17 +73,20 @@ function initCanvas () {
 		}
 
 	};
-
+////////////////////////////////////
 ///////INSTANCES OF WALLS//////////
 
 	var mainRest = new CreateRestr();
 	mainRest.w = canvW;
 	mainRest.h = canvH;
+	mainRest.x = 0;
+	mainRest.y = 0;
 
 
+//////////////////////////////////////////////////////////////////////////////////
 ////////////////////LABYRINTH CONSTRUCTOR FUNCTIONs//////////////////////////////
 	
-	 function MazeWall () {
+	function MazeWall () {
 
 		//properties
 
@@ -111,8 +110,8 @@ function initCanvas () {
 		}
 
 	};
-
-///////INSTANCE OF OUTER MAZE//////////
+/////////////////////////////////////////////////////////////////////////
+////////////////////////INSTANCES OF MAZEWALL///////////////////////////
 
 ////// outer maze ////////
 
@@ -150,7 +149,7 @@ function initCanvas () {
 
 
 
-
+/////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////DRAWING STUFF/////////////////////////////////////
 
 	function animate () {
@@ -160,17 +159,18 @@ function initCanvas () {
 
 	//////.....draw here......//////
 	 
-		backGround.render();
+		
 		mainRest.render();
 		outerMazeWall.render();
 		innerMazeWall.render();
+		backGround.render();
 
 		clearInterval(animateInterval)
 		
 		ctx.restore();
 	}
 
-
+///////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////// SETTING ANIMATION TIMER/////////////////////////////////
 
 	var animateInterval = setInterval( animate,250);
@@ -184,6 +184,7 @@ function initCanvas () {
 ////////////////////////////////////////////////////////////////////////////////////////
 
 
+////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////ADDING EVENT LISTENERS TO KEYBOARDS/////////////////////////
 
 ////////listener for keydown//////
@@ -202,26 +203,38 @@ function initCanvas () {
 		switch (target) {
 			//upward movement
 			case 38:
-					 backGround.y -= 12 ;
-					 backGround.clipY = 96; console.log();
+					 backGround.y -= 12 ; // moving character
+					 backGround.clipY = 96; // relevant char image
+					 if (backGround.y <= mainRest.y) {
+					 	backGround.y = mainRest.y +5
+					 }
 
 			break;
 			//downward movement
 			case 40: 
-					 backGround.y += 12; 
-					 backGround.clipY = 0;
+					 backGround.y += 12; // moving character
+					 backGround.clipY = 0; // relevant char image
+					 if (backGround.y >= mainRest.h - 52) {
+					 	backGround.y = mainRest.h -55;
+					 }
 
 			break;
 			//left movement
 			case 37:
-					 backGround.x -= 12; 
-					 backGround.clipY = 32;
+					 backGround.x -= 12; // moving character
+					 backGround.clipY = 32;// relevant char image
+					 if (backGround.x <= mainRest.x ) {
+					 	backGround.x = mainRest.x;
+					 }
 
 			break;
 			//right movement
 			case 39:
-			 		backGround.x += 12; 
-			 		backGround.clipY = 64;
+			 		backGround.x += 12; // moving character
+			 		backGround.clipY = 64;// relevant char image
+			 		if (backGround.x >= mainRest.w - 52) {
+					 	backGround.x = mainRest.w -50;
+					 }
 
 			break;
 		}
