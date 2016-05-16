@@ -15,8 +15,6 @@ function initCanvas () {
 	var canvW = ctx.canvas.width; 
 	var canvH = ctx.canvas.height;
 
-	
-	
 
 ///////////////////////////////////////////////////////////
 //////CHARACTER BACKGROUNDS CONSTRUCTOR FUNCTION//////////
@@ -73,6 +71,7 @@ function initCanvas () {
 		}
 
 	};
+
 ////////////////////////////////////
 ///////INSTANCES OF WALLS//////////
 
@@ -216,6 +215,16 @@ function initCanvas () {
 					 	(backGround.x < outerMazeWall.ltx3)) 
 					 	{backGround.y = outerMazeWall.lty3;
 					 	} 
+					 ///outer maze inside
+					 // upper wall
+					 if ((backGround.y <= outerMazeWall.lty2)&&
+					 	(backGround.y >= outerMazeWall.lty2 - 30)&&
+					 	(backGround.x > outerMazeWall.ltx1 - 30)&&
+					 	(backGround.x < outerMazeWall.ltx2)) 
+					 	{backGround.y = outerMazeWall.lty2;
+					 	}
+
+
 
 			break;
 			//downward movement
@@ -227,12 +236,21 @@ function initCanvas () {
 					 if (backGround.y >= mainRest.h - 52) {backGround.y = mainRest.h -55;}
 					 ///// outer maze restrictions//////
 					 ///outer maze outside
-					 if ((backGround.y >= outerMazeWall.lty1 - 52)&&
-					 	(backGround.y <= outerMazeWall.lty1 + 30)&&
+					 if ((backGround.y >= outerMazeWall.lty1 - 50)&&
+					 	(backGround.y <= outerMazeWall.lty1  - 20)&&
 					 	(backGround.x > outerMazeWall.ltx4 - 50)&&
 					 	(backGround.x < outerMazeWall.ltx3 - 30)) 
-					 	{backGround.y = outerMazeWall.lty1 -52;
+					 	{backGround.y = outerMazeWall.lty1 - 52;
 					 	} 
+					 ///outer maze inside
+					 //  bottom wall
+					  if ((backGround.y <= outerMazeWall.lty3 - 10 )&&
+					 	(backGround.y >= outerMazeWall.lty3 - 50)&&
+					 	(backGround.x > outerMazeWall.ltx1 - 50)&&
+					 	(backGround.x < outerMazeWall.ltx2 - 30)) 
+					 	{backGround.y = outerMazeWall.lty3  - 52;
+					 	}
+
 
 			break;
 			//left movement
@@ -245,11 +263,26 @@ function initCanvas () {
 					 ///// outer maze restrictions//////
 					 ///outer maze outside
 					 if ((backGround.x <= outerMazeWall.ltx3)&&
-					 	(backGround.x >= outerMazeWall.ltx3 - 30)&&
+					 	(backGround.x >= outerMazeWall.ltx3 - 50)&&
 					 	(backGround.y > outerMazeWall.lty2 - 52 )&&
-					 	(backGround.y < outerMazeWall.lty3 -30)) 
-					 	{backGround.x = outerMazeWall.ltx3 ;
+					 	(backGround.y < outerMazeWall.lty3 - 30)) 
+					 	{backGround.x = outerMazeWall.ltx3;
 					 	} 
+					 ///outer maze inside
+					 // upper wall
+					 if ((backGround.x <= outerMazeWall.ltx1 )&&
+					 	(backGround.x >= outerMazeWall.ltx1 - 30 )&&
+					 	(backGround.y < outerMazeWall.mty1 - 30)&&
+					 	(backGround.y > outerMazeWall.lty1 - 30)) 
+					 	{backGround.x = outerMazeWall.ltx1 ;
+					 	} 
+					 // lower wall
+					if ((backGround.x <= outerMazeWall.ltx1 )&&
+					 	(backGround.x >= outerMazeWall.ltx1 - 30 )&&
+					 	(backGround.y < outerMazeWall.lty4 )&&
+					 	(backGround.y > outerMazeWall.lty5 - 30)) 
+					 	{backGround.x = outerMazeWall.ltx1 ;
+					 	}
 
 			break;
 			//right movement
@@ -276,7 +309,19 @@ function initCanvas () {
 					 	(backGround.y < outerMazeWall.lty4 )&&
 					 	(backGround.y > outerMazeWall.lty5 - 50)) 
 					 	{backGround.x = outerMazeWall.ltx1 -50;
+					 	}
+
+					 ///outer maze inside
+					 // right wall 
+					 if ((backGround.x >= outerMazeWall.ltx3 - 50)&&
+					 	(backGround.x <= outerMazeWall.ltx3 - 20)&&
+					 	(backGround.y > outerMazeWall.lty2 - 30)&&
+					 	(backGround.y < outerMazeWall.lty3 )) 
+					 	{backGround.x = outerMazeWall.ltx3 - 50;
 					 	} 
+
+
+
 
 			break;
 		}
