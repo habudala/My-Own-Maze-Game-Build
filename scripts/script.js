@@ -5,6 +5,8 @@
 
 var heroBackground = new Image();
 heroBackground.src = "Images/sprite image.png";
+var levelImage = new Image();
+levelImage .src = "Images/pjimage.jpg"
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////INITIALIZING GAME ANIMATION/////////////////////////////////////
@@ -23,12 +25,17 @@ function initCanvas () {
 
 		// methods 
 		this.render = function(){
-
+			// this.clipX = backGround.clipX += 32;
 			ctx.drawImage(heroBackground,this.clipX += 32, this.clipY, this.clipW, this.clipH, this.x, this.y, this.w, this.h);
 			
 			if (this.clipX >= 64) {
-				this.clipX = -32;
+				this.clipX = 0;
 			}
+			
+		};
+		this.stop = function(){
+			this.clipX = backGround.clipX;
+			ctx.drawImage(heroBackground,this.clipX, this.clipY, this.clipW, this.clipH, this.x, this.y, this.w, this.h);
 			
 		};
 	}
@@ -43,11 +50,40 @@ function initCanvas () {
 	backGround.y = 310;
 	backGround.w = 50;
 	backGround.h = 50;
-	backGround.clipX = -32;
+	backGround.clipX = 0;
 	backGround.clipY = 64;
 	backGround.clipW = 32;
 	backGround.clipH = 32;
 
+
+////////////////////////////////////////////////
+//////////// GAME BACKGROUND CONSTRUCTOR///////
+
+function GameBackground () {
+
+		// methods 
+		this.render = function(){
+
+			ctx.drawImage(levelImage,this.clipX += 1, this.clipY, this.clipW, this.clipH, this.x, this.y, this.w, this.h);
+			
+			if (this.clipX >= 3300) {
+				this.clipX = 0;
+			}
+			
+		};
+	}
+
+////////////////////////////////////////////
+/////////CREATE BACKGROUND/////////////////
+	var gameBG = new GameBackground ();
+	gameBG.x = 0;
+	gameBG.y = 0;
+	gameBG.w = canvW;
+	gameBG.h = canvH;
+	gameBG.clipX = 0;
+	gameBG.clipY = 0;
+	gameBG.clipW = 650;
+	gameBG.clipH = 650;
 
 ///////////////////////////////////////////
 //////WALLS CONSTRUCTOR FUNCTION//////////
@@ -59,15 +95,15 @@ function initCanvas () {
 		// methods 
 		this.render = function(){
 
-			ctx.strokeStyle = "black";
+			ctx.strokeStyle = "red";
 			ctx.lineWidth = 10;
-			// ctx.lineCap = "round";
-			// ctx.lineJoin = "round";
-			// ctx.setLineDash([10,25,7]);
-			// ctx.lineDashOffset = this.dashOffset;
-			// ctx.strokeStyle = "dashed";
+			ctx.lineCap = "round";
+			ctx.lineJoin = "round";
+			ctx.setLineDash([10,25,15]);
+			ctx.lineDashOffset = this.lineDashOffset;
+			ctx.strokeStyle = "dashed";
 			ctx.strokeRect(mainRest.x,mainRest.y,this.w,this.h);
-			
+			this.lineDashOffset+=2;
 		};
 
 	}
@@ -80,6 +116,7 @@ function initCanvas () {
 	mainRest.h = canvH;
 	mainRest.x = 0;
 	mainRest.y = 0;
+	mainRest.lineDashOffset = 10;
 
 
 //////////////////////////////////////////////////////////////////////////////////
@@ -93,7 +130,7 @@ function initCanvas () {
 		this.render = function(){
 
 			//console.log("I work") //self check
-			ctx.strokeStyle = "black";
+			ctx.strokeStyle = "red";
 			ctx.lineWidth = 7;
 
 			ctx.beginPath();
@@ -143,24 +180,27 @@ function initCanvas () {
 	innerMazeWall.ltx5 = 890;
 	innerMazeWall.lty5 = 375; //y1
 
+		
+
 
 /////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////DRAWING STUFF/////////////////////////////////////
 
-	function animate () {
+	function animateI () {
 	////draw within ctx.save & ctx.restore
 		ctx.save();
 		ctx.clearRect(0,0,canvW,canvH); // this allows for movement effect (instead of drawn effect)
 
 	//////.....draw here......//////
 	 
-		
+		gameBG.render();
 		mainRest.render();
+		
 		outerMazeWall.render();
 		innerMazeWall.render();
 		backGround.render();
-
-		clearInterval(animateInterval)
+		
+		 clearInterval(animateInterval)
 		
 		ctx.restore();
 	}
@@ -168,7 +208,8 @@ function initCanvas () {
 ///////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////// SETTING ANIMATION TIMER/////////////////////////////////
 
-	var animateInterval = setInterval( animate,250);
+	var animateInterval = setInterval( animateI,50);
+	// clearInterval(animateInterval);
 	
 
 /////////////////////////////////////////////////////////////////////////////////////////
@@ -178,7 +219,21 @@ function initCanvas () {
 	//});
 ////////////////////////////////////////////////////////////////////////////////////////
 
+	function animateII () {
 
+		ctx.save();
+		ctx.clearRect(0,0,canvW,canvH);
+		ctx.restore();
+		gameBG.render();
+		mainRest.render();
+		outerMazeWall.render();
+		innerMazeWall.render();
+		backGround.stop();
+		
+	}
+	animateII();
+
+	var animate2Interval = setInterval( animateII,50);
 ////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////ADDING EVENT LISTENERS TO KEYBOARDS/////////////////////////
 
@@ -192,8 +247,8 @@ function initCanvas () {
 		//-40 down
 		//- 37 left
 		//-39 right
-
-		animate();
+		clearInterval(animate2Interval);
+		animateI();
 
 		switch (target) {
 			//upward movement
@@ -422,6 +477,7 @@ function initCanvas () {
 			target = e.keyCode;
 
 		 clearInterval(animateInterval);
+		 var animate2Interval = setInterval( animateII,150);
 
 	});
 
