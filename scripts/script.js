@@ -205,36 +205,78 @@ function initCanvas () {
 			case 38:
 					 backGround.y -= 12 ; // moving character
 					 backGround.clipY = 96; // relevant char image
-					 if (backGround.y <= mainRest.y) {
-					 	backGround.y = mainRest.y +5
-					 }
+
+					 /////field restrictions//////
+					 if (backGround.y <= mainRest.y) {backGround.y = mainRest.y +5;}
+					 ///// outer maze restrictions//////
+					 ///outer maze outside
+					 if ((backGround.y <= outerMazeWall.lty3)&&
+					 	(backGround.y >= outerMazeWall.lty3 - 30)&&
+					 	(backGround.x > outerMazeWall.ltx4 - 50)&&
+					 	(backGround.x < outerMazeWall.ltx3)) 
+					 	{backGround.y = outerMazeWall.lty3;
+					 	} 
 
 			break;
 			//downward movement
 			case 40: 
 					 backGround.y += 12; // moving character
 					 backGround.clipY = 0; // relevant char image
-					 if (backGround.y >= mainRest.h - 52) {
-					 	backGround.y = mainRest.h -55;
-					 }
+
+					 /////field restrictions//////
+					 if (backGround.y >= mainRest.h - 52) {backGround.y = mainRest.h -55;}
+					 ///// outer maze restrictions//////
+					 ///outer maze outside
+					 if ((backGround.y >= outerMazeWall.lty1 - 52)&&
+					 	(backGround.y <= outerMazeWall.lty1 + 30)&&
+					 	(backGround.x > outerMazeWall.ltx4 - 50)&&
+					 	(backGround.x < outerMazeWall.ltx3 - 30)) 
+					 	{backGround.y = outerMazeWall.lty1 -52;
+					 	} 
 
 			break;
 			//left movement
 			case 37:
 					 backGround.x -= 12; // moving character
 					 backGround.clipY = 32;// relevant char image
-					 if (backGround.x <= mainRest.x ) {
-					 	backGround.x = mainRest.x;
-					 }
+
+					 /////field restrictions//////
+					 if (backGround.x <= mainRest.x ) {backGround.x = mainRest.x;}
+					 ///// outer maze restrictions//////
+					 ///outer maze outside
+					 if ((backGround.x <= outerMazeWall.ltx3)&&
+					 	(backGround.x >= outerMazeWall.ltx3 - 30)&&
+					 	(backGround.y > outerMazeWall.lty2 - 52 )&&
+					 	(backGround.y < outerMazeWall.lty3 -30)) 
+					 	{backGround.x = outerMazeWall.ltx3 ;
+					 	} 
 
 			break;
 			//right movement
 			case 39:
 			 		backGround.x += 12; // moving character
 			 		backGround.clipY = 64;// relevant char image
-			 		if (backGround.x >= mainRest.w - 52) {
-					 	backGround.x = mainRest.w -50;
-					 }
+
+			 		/////field restrictions//////
+			 		if (backGround.x >= mainRest.w - 52) {backGround.x = mainRest.w -50;}
+
+			 		///// outer maze restrictions//////
+			 		///outer maze outside
+
+			 		// upper wall
+			 		if ((backGround.x >= outerMazeWall.ltx1 - 50)&&
+					 	(backGround.x <= outerMazeWall.ltx1 - 20)&&
+					 	(backGround.y < outerMazeWall.mty1 - 30)&&
+					 	(backGround.y > outerMazeWall.lty1 - 50)) 
+					 	{backGround.x = outerMazeWall.ltx1 -50;
+					 	} 
+					// lower wall
+					if ((backGround.x >= outerMazeWall.ltx1 - 50)&&
+					 	(backGround.x <= outerMazeWall.ltx1 - 20)&&
+					 	(backGround.y < outerMazeWall.lty4 )&&
+					 	(backGround.y > outerMazeWall.lty5 - 50)) 
+					 	{backGround.x = outerMazeWall.ltx1 -50;
+					 	} 
 
 			break;
 		}
