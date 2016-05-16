@@ -19,7 +19,7 @@ function initCanvas () {
 ///////////////////////////////////////////////////////////
 //////CHARACTER BACKGROUNDS CONSTRUCTOR FUNCTION//////////
 
-	 function PlayerBackground () {
+	function PlayerBackground () {
 
 		// methods 
 		this.render = function(){
@@ -30,9 +30,9 @@ function initCanvas () {
 				this.clipX = -32;
 			}
 			
-		}
+		};
+	}
 
-	};
 
 ///////////////////////////////////////////////////
 ///////INSTANCES OF BACKGROUNDS(PLAYERS)//////////
@@ -68,9 +68,9 @@ function initCanvas () {
 			// ctx.strokeStyle = "dashed";
 			ctx.strokeRect(0,0,this.w,this.h);
 			
-		}
+		};
 
-	};
+	}
 
 ////////////////////////////////////
 ///////INSTANCES OF WALLS//////////
@@ -104,7 +104,6 @@ function initCanvas () {
 			ctx.lineTo(this.ltx4, this.lty4);
 			ctx.lineTo(this.ltx4, this.lty5);
 			ctx.stroke();
-
 			
 		}
 
@@ -131,21 +130,18 @@ function initCanvas () {
 ////// inner maze ////////
 
 	var innerMazeWall = new MazeWall();
-	innerMazeWall.mtx1 = 890;
-	innerMazeWall.mty1 = 275;
-	innerMazeWall.ltx1 = 890
-	innerMazeWall.lty1 = 200;
-	innerMazeWall.ltx2 = 210;
-	innerMazeWall.lty2 = 200;
+	innerMazeWall.mtx1 = 890; 
+	innerMazeWall.mty1 = 275; 
+	innerMazeWall.ltx1 = 890; 
+	innerMazeWall.lty1 = 200; 
+	innerMazeWall.ltx2 = 210; 
+	innerMazeWall.lty2 = 200; 
 	innerMazeWall.ltx3 = 210;
-	innerMazeWall.lty3 = 450;
+	innerMazeWall.lty3 = 450; 
 	innerMazeWall.ltx4 = 890;
 	innerMazeWall.lty4 = 450;
 	innerMazeWall.ltx5 = 890;
 	innerMazeWall.lty5 = 375;
-
-
-
 
 
 /////////////////////////////////////////////////////////////////////////////////////////
@@ -173,7 +169,7 @@ function initCanvas () {
 ///////////////////////////////// SETTING ANIMATION TIMER/////////////////////////////////
 
 	var animateInterval = setInterval( animate,250);
-
+	
 
 /////////////////////////////////////////////////////////////////////////////////////////
 	///// stopping animate function
@@ -202,44 +198,54 @@ function initCanvas () {
 		switch (target) {
 			//upward movement
 			case 38:
-					 backGround.y -= 12 ; // moving character
+					 backGround.y -= 15 ; // moving character
 					 backGround.clipY = 96; // relevant char image
 
 					 /////field restrictions//////
-					 if (backGround.y <= mainRest.y) {backGround.y = mainRest.y +5;}
+					 if (backGround.y <= mainRest.y) {backGround.y = mainRest.y + 5;}
 					 ///// outer maze restrictions//////
 					 ///outer maze outside
-					 if ((backGround.y <= outerMazeWall.lty3)&&
-					 	(backGround.y >= outerMazeWall.lty3 - 30)&&
+					 if ((backGround.y <= outerMazeWall.lty3 - 10)&&
+					 	(backGround.y >= outerMazeWall.lty3 - 40)&&
 					 	(backGround.x > outerMazeWall.ltx4 - 50)&&
-					 	(backGround.x < outerMazeWall.ltx3)) 
-					 	{backGround.y = outerMazeWall.lty3;
+					 	(backGround.x < outerMazeWall.ltx3))
+
+					 	{backGround.y = outerMazeWall.lty3 - 10;
 					 	} 
 					 ///outer maze inside
 					 // upper wall
-					 if ((backGround.y <= outerMazeWall.lty2)&&
-					 	(backGround.y >= outerMazeWall.lty2 - 30)&&
+					 if ((backGround.y <= outerMazeWall.lty2 - 10)&&
+					 	(backGround.y >= outerMazeWall.lty2 - 40)&&
 					 	(backGround.x > outerMazeWall.ltx1 - 30)&&
-					 	(backGround.x < outerMazeWall.ltx2)) 
-					 	{backGround.y = outerMazeWall.lty2;
+					 	(backGround.x < outerMazeWall.ltx2))
+
+					 	{backGround.y = outerMazeWall.lty2 - 10;
 					 	}
+					 	///// inner maze restrictions//////
+					 	///inner maze outside///
+					 if ((backGround.y <= innerMazeWall.lty3 - 10)&&
+					 	(backGround.y >= innerMazeWall.lty3 - 40)&&
+					 	(backGround.x > innerMazeWall.ltx3 - 50)&&
+					 	(backGround.x < innerMazeWall.ltx4 - 30)) 
 
-
+					 	{backGround.y = innerMazeWall.lty3 - 10;
+					 	}
 
 			break;
 			//downward movement
 			case 40: 
-					 backGround.y += 12; // moving character
+					 backGround.y += 15; // moving character
 					 backGround.clipY = 0; // relevant char image
 
 					 /////field restrictions//////
-					 if (backGround.y >= mainRest.h - 52) {backGround.y = mainRest.h -55;}
+					 if (backGround.y >= mainRest.h - 52) {backGround.y = mainRest.h - 55;}
 					 ///// outer maze restrictions//////
 					 ///outer maze outside
 					 if ((backGround.y >= outerMazeWall.lty1 - 50)&&
 					 	(backGround.y <= outerMazeWall.lty1  - 20)&&
-					 	(backGround.x > outerMazeWall.ltx4 - 50)&&
-					 	(backGround.x < outerMazeWall.ltx3 - 30)) 
+					 	(backGround.x > outerMazeWall.ltx4 - 30)&&
+					 	(backGround.x < outerMazeWall.ltx3 - 10))
+
 					 	{backGround.y = outerMazeWall.lty1 - 52;
 					 	} 
 					 ///outer maze inside
@@ -248,14 +254,24 @@ function initCanvas () {
 					 	(backGround.y >= outerMazeWall.lty3 - 50)&&
 					 	(backGround.x > outerMazeWall.ltx1 - 50)&&
 					 	(backGround.x < outerMazeWall.ltx2 - 30)) 
+
 					 	{backGround.y = outerMazeWall.lty3  - 52;
+					 	}
+					 	///// inner maze restrictions//////
+					 	///inner maze outside
+					 if ((backGround.y >= innerMazeWall.lty1 - 52)&&
+					 	(backGround.y <= innerMazeWall.lty1 - 20)&&
+					 	(backGround.x < innerMazeWall.ltx1 )&&
+					 	(backGround.x > innerMazeWall.ltx2 )) 
+
+					 	{backGround.y = innerMazeWall.lty1 - 52 ;
 					 	}
 
 
 			break;
 			//left movement
 			case 37:
-					 backGround.x -= 12; // moving character
+					 backGround.x -= 15; // moving character
 					 backGround.clipY = 32;// relevant char image
 
 					 /////field restrictions//////
@@ -266,6 +282,7 @@ function initCanvas () {
 					 	(backGround.x >= outerMazeWall.ltx3 - 50)&&
 					 	(backGround.y > outerMazeWall.lty2 - 52 )&&
 					 	(backGround.y < outerMazeWall.lty3 - 30)) 
+
 					 	{backGround.x = outerMazeWall.ltx3;
 					 	} 
 					 ///outer maze inside
@@ -274,24 +291,44 @@ function initCanvas () {
 					 	(backGround.x >= outerMazeWall.ltx1 - 30 )&&
 					 	(backGround.y < outerMazeWall.mty1 - 30)&&
 					 	(backGround.y > outerMazeWall.lty1 - 30)) 
+
 					 	{backGround.x = outerMazeWall.ltx1 ;
 					 	} 
 					 // lower wall
 					if ((backGround.x <= outerMazeWall.ltx1 )&&
 					 	(backGround.x >= outerMazeWall.ltx1 - 30 )&&
-					 	(backGround.y < outerMazeWall.lty4 )&&
-					 	(backGround.y > outerMazeWall.lty5 - 30)) 
+					 	(backGround.y < outerMazeWall.lty4 - 10)&&
+					 	(backGround.y > outerMazeWall.lty5 - 30))
+
 					 	{backGround.x = outerMazeWall.ltx1 ;
 					 	}
+					 	///// inner maze restrictions//////
+					 	///inner maze outside top
+					 if ((backGround.x <= innerMazeWall.ltx1)&&
+					 	(backGround.x >= innerMazeWall.ltx1 - 30)&&
+					 	(backGround.y < innerMazeWall.mty1 )&&
+					 	(backGround.y > innerMazeWall.lty1 - 50)) 
+
+					 	{backGround.x = innerMazeWall.ltx1 ;
+					 	}
+					 	///inner maze outside bottom
+					 	 if ((backGround.x <= innerMazeWall.ltx1)&&
+					 	(backGround.x >= innerMazeWall.ltx1 - 30)&&
+					 	(backGround.y > innerMazeWall.lty5 - 50)&&
+					 	(backGround.y < innerMazeWall.lty4 - 12)) 
+
+					 	{backGround.x = innerMazeWall.ltx1 ;
+					 	}
+					
 
 			break;
 			//right movement
 			case 39:
-			 		backGround.x += 12; // moving character
+			 		backGround.x += 15; // moving character
 			 		backGround.clipY = 64;// relevant char image
 
 			 		/////field restrictions//////
-			 		if (backGround.x >= mainRest.w - 52) {backGround.x = mainRest.w -50;}
+			 		if (backGround.x >= mainRest.w - 52) {backGround.x = mainRest.w - 50;}
 
 			 		///// outer maze restrictions//////
 			 		///outer maze outside
@@ -300,15 +337,17 @@ function initCanvas () {
 			 		if ((backGround.x >= outerMazeWall.ltx1 - 50)&&
 					 	(backGround.x <= outerMazeWall.ltx1 - 20)&&
 					 	(backGround.y < outerMazeWall.mty1 - 30)&&
-					 	(backGround.y > outerMazeWall.lty1 - 50)) 
-					 	{backGround.x = outerMazeWall.ltx1 -50;
+					 	(backGround.y > outerMazeWall.lty1 - 50))
+
+					 	{backGround.x = outerMazeWall.ltx1 - 50;
 					 	} 
 					// lower wall
 					if ((backGround.x >= outerMazeWall.ltx1 - 50)&&
 					 	(backGround.x <= outerMazeWall.ltx1 - 20)&&
 					 	(backGround.y < outerMazeWall.lty4 )&&
-					 	(backGround.y > outerMazeWall.lty5 - 50)) 
-					 	{backGround.x = outerMazeWall.ltx1 -50;
+					 	(backGround.y > outerMazeWall.lty5 - 50))
+
+					 	{backGround.x = outerMazeWall.ltx1 - 50;
 					 	}
 
 					 ///outer maze inside
@@ -317,11 +356,18 @@ function initCanvas () {
 					 	(backGround.x <= outerMazeWall.ltx3 - 20)&&
 					 	(backGround.y > outerMazeWall.lty2 - 30)&&
 					 	(backGround.y < outerMazeWall.lty3 )) 
+
 					 	{backGround.x = outerMazeWall.ltx3 - 50;
-					 	} 
+					 	}
+					 	///// inner maze restrictions////// 
+					 	///inner maze outside///
+					 if ((backGround.x >= innerMazeWall.ltx2 - 50)&&
+					 	(backGround.x <= innerMazeWall.ltx2)&&
+					 	(backGround.y > innerMazeWall.lty2 - 50)&&
+					 	(backGround.y < innerMazeWall.lty3 - 12)) 
 
-
-
+					 	{backGround.x = innerMazeWall.ltx2 - 50 ;
+					 	}
 
 			break;
 		}
