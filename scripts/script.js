@@ -102,8 +102,11 @@ function GameBackground () {
 			ctx.setLineDash([10,25,15]);
 			ctx.lineDashOffset = this.lineDashOffset;
 			ctx.strokeStyle = "dashed";
-			ctx.strokeRect(mainRest.x,mainRest.y,this.w,this.h);
+			ctx.strokeRect(this.x,this.y,this.w,this.h);
 			this.lineDashOffset+=2;
+			
+
+			// if (this.lineDashOffset >= 50) {this.lineDashOffset = 10;}
 		};
 
 	}
@@ -117,6 +120,7 @@ function GameBackground () {
 	mainRest.x = 0;
 	mainRest.y = 0;
 	mainRest.lineDashOffset = 10;
+	
 
 
 //////////////////////////////////////////////////////////////////////////////////
@@ -208,7 +212,7 @@ function GameBackground () {
 ///////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////// SETTING ANIMATION TIMER/////////////////////////////////
 
-	var animateInterval = setInterval( animateI,50);
+	var animateInterval = setInterval( animateI,150);
 	// clearInterval(animateInterval);
 	
 
@@ -218,8 +222,9 @@ function GameBackground () {
 		//clearInterval(animateInterval)
 	//});
 ////////////////////////////////////////////////////////////////////////////////////////
-
+///////////////////////////SECOND (NON-STOP) ANIMATION/////////////////////////
 	function animateII () {
+		
 
 		ctx.save();
 		ctx.clearRect(0,0,canvW,canvH);
@@ -233,7 +238,7 @@ function GameBackground () {
 	}
 	animateII();
 
-	var animate2Interval = setInterval( animateII,50);
+	var animate2Interval = setInterval( animateII,150);
 ////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////ADDING EVENT LISTENERS TO KEYBOARDS/////////////////////////
 
@@ -474,8 +479,8 @@ function GameBackground () {
 ///////////////listener for keyup/////////////////
 
 	document.addEventListener("keyup", function (e) {
-			target = e.keyCode;
-
+		target = e.keyCode;
+		
 		 clearInterval(animateInterval);
 		 var animate2Interval = setInterval( animateII,150);
 
