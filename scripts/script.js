@@ -6,7 +6,15 @@
 var heroBackground = new Image();
 heroBackground.src = "Images/sprite image.png";
 var levelImage = new Image();
-levelImage .src = "Images/pjimage.jpg"
+levelImage.src = "Images/pjimage.jpg";
+var foeBackground = new Image();
+foeBackground.src = "Images/enemy sprite.png"
+
+var direction = -1;
+var sg = 0;
+var keyAct = false;
+var variation;
+
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////INITIALIZING GAME ANIMATION/////////////////////////////////////
@@ -22,9 +30,10 @@ function initCanvas () {
 //////CHARACTER BACKGROUNDS CONSTRUCTOR FUNCTION//////////
 
 	function PlayerBackground () {
+		
 
 		// methods 
-		this.render = function(){
+		this.run = function(){
 			// this.clipX = backGround.clipX += 32;
 			ctx.drawImage(heroBackground,this.clipX += 32, this.clipY, this.clipW, this.clipH, this.x, this.y, this.w, this.h);
 			
@@ -33,27 +42,113 @@ function initCanvas () {
 			}
 			
 		};
+
 		this.stop = function(){
 			this.clipX = backGround.clipX;
 			ctx.drawImage(heroBackground,this.clipX, this.clipY, this.clipW, this.clipH, this.x, this.y, this.w, this.h);
 			
 		};
+
+		
+
+		// this.foeMoveUp = function (){
+		// 	ctx.drawImage(foeBackground,this.clipX += 32, this.clipY, this.clipW, this.clipH, this.x, this.y, this.w, this.h);
+		// 	// this.x -= 5;
+
+		// 	if (this.clipX >= 64) {
+		// 		this.clipX = 0;
+		// 	}
+		// 	// if (this.x < manRest.x) {this.}
+		// 	if (this.x > mainRest.x) { this.x -= 7; this.clipY = 32;}
+			
+		// };
+
+		this.foeMove = function (){
+			ctx.drawImage(foeBackground,this.clipX += 32, this.clipY, this.clipW, this.clipH, this.x, this.y, this.w, this.h);
+			// this.x -= 5;
+
+			rand = Math.floor(Math.random()*10 + 1);
+			console.log(rand);
+
+			if (rand > 5) { variation = -7;} else {variation = +7}
+			if (this.clipX >= 64) {
+				this.clipX = 0;
+			}
+			if (sg == 0) {
+				if (this.x > mainRest.x + 5) { this.x -= 5; this.y =this.y + variation; console.log("left"); this.clipY = 32;}
+				else  { this.x = mainRest.x + 5; sg = 1;}
+			}else  {
+			    if (this.x < mainRest.w - 35) {this.x += 5;this.y =this.y + variation; this.clipY = 64;}
+				else  { this.x = this.x - 35; sg = 0;}
+			}
+
+			 if (this.y < mainRest.y) {this.y = mainRest.y + 5; console.log("I run");}
+			if (this.y > mainRest.h -40) {this.y = mainRest.h - 45; console.log("I run too");}
+			
+			variation = 0;
+		};
+
+
 	}
 
 
 ///////////////////////////////////////////////////
 ///////INSTANCES OF BACKGROUNDS(PLAYERS)//////////
 
-	////// player////////
+	////// hero ////////
 	var backGround = new PlayerBackground();
 	backGround.x = 10;
 	backGround.y = 310;
-	backGround.w = 50;
-	backGround.h = 50;
+	backGround.w = 40;
+	backGround.h = 40;
 	backGround.clipX = 0;
 	backGround.clipY = 64;
 	backGround.clipW = 32;
 	backGround.clipH = 32;
+
+	///// foes ///////
+	var foe1Bg = new PlayerBackground();
+	foe1Bg.x = 700;
+	foe1Bg.y = 40;
+	foe1Bg.w = 40;
+	foe1Bg.h = 40;
+	foe1Bg.clipX = 0;
+	foe1Bg.clipY = 32;
+	foe1Bg.clipW = 32;
+	foe1Bg.clipH = 32;
+
+
+	var foe3Bg = new PlayerBackground();
+	foe3Bg.x = 900;
+	foe3Bg.y = 300;
+	foe3Bg.w = 43;
+	foe3Bg.h = 43;
+	foe3Bg.clipX = 0;
+	foe3Bg.clipY = 32;
+	foe3Bg.clipW = 32;
+	foe3Bg.clipH = 32;
+
+
+	var foe4Bg = new PlayerBackground();
+	foe4Bg.x = 900;
+	foe4Bg.y = 450
+	foe4Bg.w = 40;
+	foe4Bg.h = 40;
+	foe4Bg.clipX = 0;
+	foe4Bg.clipY = 32;
+	foe4Bg.clipW = 32;
+	foe4Bg.clipH = 32;
+	
+
+	var foe5Bg = new PlayerBackground();
+	foe5Bg.x = 900;
+	foe5Bg.y = 570;
+	foe5Bg.w = 40;
+	foe5Bg.h = 40;
+	foe5Bg.clipX = 0;
+	foe5Bg.clipY = 32;
+	foe5Bg.clipW = 32;
+	foe5Bg.clipH = 32;
 
 
 ////////////////////////////////////////////////
@@ -64,7 +159,7 @@ function GameBackground () {
 		// methods 
 		this.render = function(){
 
-			ctx.drawImage(levelImage,this.clipX += 1, this.clipY, this.clipW, this.clipH, this.x, this.y, this.w, this.h);
+			ctx.drawImage(levelImage,this.clipX += 5, this.clipY, this.clipW, this.clipH, this.x, this.y, this.w, this.h);
 			
 			if (this.clipX >= 3300) {
 				this.clipX = 0;
@@ -96,14 +191,14 @@ function GameBackground () {
 		this.render = function(){
 
 			ctx.strokeStyle = "red";
-			ctx.lineWidth = 10;
+			ctx.lineWidth = 3;
 			ctx.lineCap = "round";
 			ctx.lineJoin = "round";
 			ctx.setLineDash([10,25,15]);
 			ctx.lineDashOffset = this.lineDashOffset;
 			ctx.strokeStyle = "dashed";
 			ctx.strokeRect(this.x,this.y,this.w,this.h);
-			this.lineDashOffset+=2;
+			this.lineDashOffset+=3;
 			
 
 			// if (this.lineDashOffset >= 50) {this.lineDashOffset = 10;}
@@ -122,7 +217,6 @@ function GameBackground () {
 	mainRest.lineDashOffset = 10;
 	
 
-
 //////////////////////////////////////////////////////////////////////////////////
 ////////////////////LABYRINTH CONSTRUCTOR FUNCTIONs//////////////////////////////
 	
@@ -135,7 +229,7 @@ function GameBackground () {
 
 			//console.log("I work") //self check
 			ctx.strokeStyle = "red";
-			ctx.lineWidth = 7;
+			ctx.lineWidth = 5;
 
 			ctx.beginPath();
 			ctx.moveTo(this.mtx1, this.mty1);
@@ -184,8 +278,6 @@ function GameBackground () {
 	innerMazeWall.ltx5 = 890;
 	innerMazeWall.lty5 = 375; //y1
 
-		
-
 
 /////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////DRAWING STUFF/////////////////////////////////////
@@ -202,18 +294,27 @@ function GameBackground () {
 		
 		outerMazeWall.render();
 		innerMazeWall.render();
-		backGround.render();
-		
-		 clearInterval(animateInterval)
+		// backGround.run();
+		foe1Bg.foeMove();
+		foe5Bg.foeMove();
+		foe3Bg.foeMove();
+		foe4Bg.foeMove();
+
+		if (keyAct === false) { backGround.stop();}
+		else{backGround.run();}
+		 // clearInterval(animateInterval)
 		
 		ctx.restore();
 	}
 
+animateI();
+	
+
 ///////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////// SETTING ANIMATION TIMER/////////////////////////////////
 
-	var animateInterval = setInterval( animateI,150);
-	// clearInterval(animateInterval);
+	var animateInterval = setInterval( animateI,100);
+	
 	
 
 /////////////////////////////////////////////////////////////////////////////////////////
@@ -221,26 +322,11 @@ function GameBackground () {
 	//ctx.canvas.addEventListener("click",function(e) {
 		//clearInterval(animateInterval)
 	//});
-////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////SECOND (NON-STOP) ANIMATION/////////////////////////
-	function animateII () {
-		
 
-		ctx.save();
-		ctx.clearRect(0,0,canvW,canvH);
-		ctx.restore();
-		gameBG.render();
-		mainRest.render();
-		outerMazeWall.render();
-		innerMazeWall.render();
-		backGround.stop();
-		
-	}
-	animateII();
-
-	var animate2Interval = setInterval( animateII,150);
 ////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////ADDING EVENT LISTENERS TO KEYBOARDS/////////////////////////
+
+	
 
 ////////listener for keydown//////
 
@@ -252,13 +338,13 @@ function GameBackground () {
 		//-40 down
 		//- 37 left
 		//-39 right
-		clearInterval(animate2Interval);
-		animateI();
-
+		
+	    keyAct = true;
+		
 		switch (target) {
 			//upward movement
 			case 38:
-					 backGround.y -= 15 ; // moving character
+					 backGround.y -= 12 ; // moving character
 					 backGround.clipY = 96; // relevant char image
 
 					 /////field restrictions//////
@@ -303,7 +389,7 @@ function GameBackground () {
 			break;
 			//downward movement
 			case 40: 
-					 backGround.y += 15; // moving character
+					 backGround.y += 12; // moving character
 					 backGround.clipY = 0; // relevant char image
 
 					 /////field restrictions//////
@@ -348,7 +434,7 @@ function GameBackground () {
 			break;
 			//left movement
 			case 37:
-					 backGround.x -= 15; // moving character
+					 backGround.x -= 12; // moving character
 					 backGround.clipY = 32;// relevant char image
 
 					 /////field restrictions//////
@@ -409,7 +495,7 @@ function GameBackground () {
 			break;
 			//right movement
 			case 39:
-			 		backGround.x += 15; // moving character
+			 		backGround.x += 12; // moving character
 			 		backGround.clipY = 64;// relevant char image
 
 			 		/////field restrictions//////
@@ -479,11 +565,10 @@ function GameBackground () {
 ///////////////listener for keyup/////////////////
 
 	document.addEventListener("keyup", function (e) {
-		target = e.keyCode;
-		
-		 clearInterval(animateInterval);
-		 var animate2Interval = setInterval( animateII,150);
 
+		target = e.keyCode;
+		 keyAct = false;
+		
 	});
 
 }
