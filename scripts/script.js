@@ -13,7 +13,7 @@ foeBackground.src = "Images/enemy sprite.png"
 var direction = -1;
 var sg = 0;
 var keyAct = false;
-var variation;
+var variation =0;
 
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -74,18 +74,24 @@ function initCanvas () {
 			if (this.clipX >= 64) {
 				this.clipX = 0;
 			}
+
+/////////////////////////////restricting enemy movement outside the canvas///////////////////////////
 			if (sg == 0) {
+
 				if (this.x > mainRest.x + 5) { this.x -= 5; this.y =this.y + variation; console.log("left"); this.clipY = 32;}
 				else  { this.x = mainRest.x + 5; sg = 1;}
-			}else  {
+
+			}else {
+
 			    if (this.x < mainRest.w - 35) {this.x += 5;this.y =this.y + variation; this.clipY = 64;}
 				else  { this.x = this.x - 35; sg = 0;}
 			}
 
-			 if (this.y < mainRest.y) {this.y = mainRest.y + 5; console.log("I run");}
+////////////////////////////////random up/down movements////////////////////////////////////////
+			if (this.y < mainRest.y) {this.y = mainRest.y + 5; console.log("I run");}
 			if (this.y > mainRest.h -40) {this.y = mainRest.h - 45; console.log("I run too");}
 			
-			variation = 0;
+			variation++;
 		};
 
 
