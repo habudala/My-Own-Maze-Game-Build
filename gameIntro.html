@@ -13,7 +13,10 @@
 					  height:96vh;
 					  margin:auto;
 					  margin-top:2vh;
-					   background:linear-gradient(to right, white, grey);}
+					   /*background:linear-gradient(to right, white, grey);*/
+					  /* background-color:#0066ff;*/
+					 background-image:url(images/stonebg.jpg);
+			   background-size: cover;}
 
 		#title {display:block;
 				margin:auto;
@@ -28,8 +31,7 @@
 			   margin-top:8vh;
 			   margin-left:5vw;
 			   box-sizing: border-box;
-			   background-image:url(images/stonebg.jpg);
-			   background-size: cover;
+			   background-color: rgba(0,0,0,0.75);
 			   border:10px outset grey;
 			   float:left;}
 
@@ -39,8 +41,7 @@
 			   margin-right:5vw;
 			   box-sizing: border-box;
 			   border:10px outset grey;
-			    background-image:url(images/stonebg.jpg);
-			   background-size: cover;
+			    background-color: rgba(0,0,0,0.75);
 			   float:right}
 
 		#players {margin-top:25px; background-color: rgba(0,0,0,0.75);}
@@ -98,14 +99,28 @@
 
 		#name2 {margin:auto; margin-top:10px;text-align:center;color:white;}
 
-		#list {margin:auto; background-color: rgba(0,0,0,0.75);}
+		#list {margin:auto; margin-top:25px; /*background-color: rgba(0,0,0,0.75);*/}
 
 
 		li {margin-left: 50px;
 			list-style-type:none;
 			color:white;
-			font-size:20px;
+			font-size:25px;
 			padding:7px;}
+
+		#link {
+		   padding:10px;
+		   background-color:green;
+		   text-align:center;
+		   width:80%;
+		   font-size:25px;
+		   font-weight:bold;
+		   margin:auto;
+		   margin-top:10px;}
+
+		a {color:white;
+			text-decoration:none;
+		   }
 
 
 	</style>
@@ -134,13 +149,14 @@
 			<div id="subtitle"><h2>Objectives and Rules</h2></div>
 			<div id="list">
 				<ul>
-					<li>Choose hero to the left </li>
-					<li>To control hero use &uarr;, &darr;, &larr;, and &rarr; arrows</li>
-					<li>Beware of the zombies!</li>
-					<li>Collect the coin in the middle to win game</li>
-					<li>The sooner you get there, the more points you win!</li>
+					<li>- Choose hero on the left </li>
+					<li>- To control hero use &uarr;, &darr;, &larr;, and &rarr; arrows</li>
+					<li>- Beware of the zombies!</li>
+					<li>- Collect the coin in the middle to win game</li>
+					<li>- The sooner you get there, the more points you win!</li>
 				</ul>
 			</div>
+			<div id="link"><a href="mygame.html">Play</a></div>
 		</div>
 
 
