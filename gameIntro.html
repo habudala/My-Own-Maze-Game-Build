@@ -20,7 +20,9 @@
 
 		#title {display:block;
 				margin:auto;
-				text-align:center;}
+				text-align:center;
+			    color:white;
+			    font-size: 30px;}
 
 		#subtitle {margin:auto;
 				   text-align:center;
@@ -46,29 +48,29 @@
 
 		#players {margin-top:25px; background-color: rgba(0,0,0,0.75);}
 
-		#player1 {height:200px;
-				  width:200px;
+		#player1 {height:150px;
+				  width:150px;
 				  box-sizing: border-box;
-				  border:5px solid black; 
+				 /* border:5px solid black; */
 				  float:left;
 				  margin-left:25px;
 				background-color:black;}
 
 		#player1:hover {
-				  border:7px solid green; 
+				  border:7px solid red; 
 				 }
 
-		#player2 {height:200px;
-				  width:200px;
+		#player2 {height:150px;
+				  width:150px;
 				  box-sizing: border-box;
-				  border:2px solid black; 
+				  /*border:2px solid black; */
 				  float:right;
 				  margin-right:25px;
 				  background-color:black;
 				  }
 
 		#player2:hover {
-				  border:7px solid green; 
+				  border:7px solid red; 
 				 }
 
 		#img1 {width:70%;
@@ -105,7 +107,7 @@
 		li {margin-left: 50px;
 			list-style-type:none;
 			color:white;
-			font-size:25px;
+			font-size:21px;
 			padding:7px;}
 
 		#link {
@@ -120,7 +122,12 @@
 
 		a {color:white;
 			text-decoration:none;
+			padding:20px;
 		   }
+
+		.p1 {border:7px outset red;}
+		.p2 {border:7px outset red;}
+		.passive {border:7px outset grey;}
 
 
 	</style>
@@ -156,12 +163,40 @@
 					<li>- The sooner you get there, the more points you win!</li>
 				</ul>
 			</div>
-			<div id="link"><a href="mygame.html">Play</a></div>
+			<a href="mygame.html"><div id="link">Play</div></a>
 		</div>
 
 
 
 	</div> <!-- mainwrapper ending -->
+
+	<script type="text/javascript">
+
+				////////////////////////////////////////////////
+		//////////////////pick hero////////////////////
+
+		localStorage.clear();
+		localStorage.setItem("playerId","0");
+
+		function changePlayer () {
+			console.log(this);
+
+			if (this.id === "player1") {
+				localStorage.clear();
+				localStorage.setItem("playerId","0");
+			}else {
+				localStorage.clear();
+				localStorage.setItem("playerId","1");
+			}
+		}
+
+		var player1 = document.getElementById("player1");
+		var player2 = document.getElementById("player2");
+		player1.addEventListener("click", changePlayer, false);
+		player2.addEventListener("click", changePlayer, false);
+	</script>
+	<!-- <script src="js/game.js"></script> -->
+
 
 </body>
 </html>
