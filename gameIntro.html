@@ -20,14 +20,16 @@
 				text-align:center;}
 
 		#subtitle {margin:auto;
-				   text-align:center;}
+				   text-align:center;
+				   color:white;}
 
 		#left {width:40vw;
 			   height:80%;
 			   margin-top:8vh;
 			   margin-left:5vw;
 			   box-sizing: border-box;
-			   background-color:red;
+			   background-image:url(images/stonebg.jpg);
+			   background-size: cover;
 			   border:10px outset grey;
 			   float:left;}
 
@@ -36,38 +38,55 @@
 			   margin-top:8vh;
 			   margin-right:5vw;
 			   box-sizing: border-box;
-			   background-color:blue;
 			   border:10px outset grey;
+			    background-image:url(images/stonebg.jpg);
+			   background-size: cover;
 			   float:right}
 
-		#players {margin-top:25px;}
+		#players {margin-top:25px; background-color: rgba(0,0,0,0.75);}
 
-		#player1 {height:250px;
+		#player1 {height:200px;
 				  width:200px;
 				  box-sizing: border-box;
-				  border:2px solid black; 
+				  border:5px solid black; 
 				  float:left;
-				  margin-left:25px;}
+				  margin-left:25px;
+				background-color:black;}
 
-		#player2 {height:250px;
+		#player1:hover {
+				  border:7px solid green; 
+				 }
+
+		#player2 {height:200px;
 				  width:200px;
 				  box-sizing: border-box;
 				  border:2px solid black; 
 				  float:right;
 				  margin-right:25px;
+				  background-color:black;
 				  }
 
-		#img1 {width:80%;
-			   height:80%;
-			   background-image:;
+		#player2:hover {
+				  border:7px solid green; 
+				 }
+
+		#img1 {width:70%;
+			   height:70%;
+			   background-image:url(images/seb.png);
+			   background-repeat: no-repeat;
+			   background-size: cover;
+			   background-position:center;
 			   box-sizing: border-box;
 			   border:1px solid black;
 			   margin:auto;
 			   margin-top:5px;}
 
-		#img2 {width:80%;
-			   height:80%;
-			   background-image:;
+		#img2 {width:70%;
+			   height:70%;
+			   background-image:url(images/nik.png);
+			    background-repeat: no-repeat;
+			   background-size: cover;
+			   background-position:center;
 			   box-sizing: border-box;
 			   border:1px solid black;
 			   margin:auto;
@@ -75,14 +94,18 @@
 			   }
 
 
-		#name1 {margin:auto; margin-top:5px;text-align:center;}
+		#name1 {margin:auto; margin-top:10px;text-align:center; color:white;}
 
-		#name2 {margin:auto; margin-top:5px;text-align:center;}
+		#name2 {margin:auto; margin-top:10px;text-align:center;color:white;}
 
-		#list {margin:auto;}
+		#list {margin:auto; background-color: rgba(0,0,0,0.75);}
 
 
-		li {margin-left: 50px;}
+		li {margin-left: 50px;
+			list-style-type:none;
+			color:white;
+			font-size:20px;
+			padding:7px;}
 
 
 	</style>
@@ -94,7 +117,7 @@
 		</div>
 
 		<div id="left">
-			<div id="subtitle"><h2>Objectives and Rules</h2></div>
+			<div id="subtitle"><h2>Players</h2></div>
 			<div id="players">
 				<div id="player1">
 					<div id="img1"></div>
@@ -111,10 +134,11 @@
 			<div id="subtitle"><h2>Objectives and Rules</h2></div>
 			<div id="list">
 				<ul>
-					<li></li>
-					<li></li>
-					<li></li>
-					<li></li>
+					<li>Choose hero to the left </li>
+					<li>To control hero use &uarr;, &darr;, &larr;, and &rarr; arrows</li>
+					<li>Beware of the zombies!</li>
+					<li>Collect the coin in the middle to win game</li>
+					<li>The sooner you get there, the more points you win!</li>
 				</ul>
 			</div>
 		</div>
